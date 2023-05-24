@@ -1,0 +1,289 @@
+ 
+
+DATABASE MANAGEMENT SYSTEM (LAB) 
+
+PROJECT REPORT
+
+BAKERY MANAGEMENT SYSTEM
+							
+Contents
+
+1.PROJECT DESCRIPTION:	3
+2.ERD DIAGRAM FOR BAKERY MANAGEMENT SYSTEM…………………………………………………4
+3.QUERIES FOR BAKERY MANAGEMENT SYSTEM	5
+4.CREATING DATABASE	5
+5.CREATING EMPLOYEE TABLE	5
+6.CREATING PRODUCT TABLE	7
+7.CREATING PURCHASE TABLE	8
+8.CREATING SALE TABLE	10
+9.CREATING STORE TABLE	12
+10.CREATING PURCHASE_DETAILS TABLE	12
+11.	CREATING  SALE_DETAILS TABLE	13
+12.	KEYS	13
+
+ 
+
+BAKERY MANAGEMENT SYSTEM
+
+PROJECT DESCRIPTION:
+
+Bakery Management System is about making a database for the bakery to make the record of the employee’s, sales/purchase and products. The currents system is very inefficient since they have to record each and everything on registers which is difficult to manage.
+
+Bakery management system will allow owners to maintain their record in one place which will be easy to manage it will also reduce the risk or errors. Storing information of all products, handling employee information, easy search for products, feedback directly, creating and managing inventory etc.
+
+This software makes the daily tasks easier, simpler and faster for everyone from small independent to large corporate franchise bakeries.
+
+ERD DIAGRAM FOR BAKERY MANAGEMENT SYSTEM 
+
+QUERIES FOR BAKERY MANAGEMENT SYSTEM
+
+
+1.	CREATING DATABASE:
+
+CREATE DATABASE bakery_management_system
+
+2.	CREATING EMPLOYEE TABLE:
+
+CREATE TABLE employee (
+  employee_id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(255) DEFAULT NULL,
+  password varchar(255) DEFAULT NULL,
+  email varchar(255) DEFAULT NULL,
+  contact varchar(255) DEFAULT NULL,
+  gender enum('male','female') DEFAULT NULL,
+  salar double(10,2) DEFAULT NULL,
+  address varchar(255) DEFAULT NULL,
+  cnic varchar(255) DEFAULT NULL,
+  feedback varchar(255) DEFAULT NULL,
+  job_aggrement varchar(255) DEFAULT NULL,
+  date_of_birth date DEFAULT NULL,
+  date_of_joining date DEFAULT NULL,
+
+  PRIMARY KEY (`employee_id`)
+)
+
+•	ADD EMPLOYEE:
+(THIS WILL INSERT DATA ONLY IN ONE COLUMN)
+
+INSERT INTO employee(Name)  
+VALUES(‘Ali’)
+
+
+(THIS WILL INSERT DATA FOR MULTIPLE COLUMN)
+
+INSERT INTO employee(Name, Salary)  
+VALUES(‘Cake’, 323.0)
+
+
+•	UPDATE EMPLOYEE:
+(For updating of one value)
+
+UPDATE employee  SET  Name=’Ahsan’ WHERE  Name=’Ali’
+
+(For updating of multiple values)
+
+UPDATE employee  SET  Name=’Ahsan’, Salary=34383.0 WHERE Name=’Ali’
+
+•	DELETE EMPLOYEE:
+(For deleting of all the data present in table) 
+
+DELETE FROM employee
+
+(For deleting of some specific data)
+DELETE FROM employee WHERE Name=’Ahsan’
+
+3.	CREATING PRODUCT TABLE:
+
+
+CREATE TABLE product (
+                              Product_id INT(11) NOT NULL AUTO_INCREMENT,
+                              Product_name VARCHAR(255) DEFAULT NULL,
+                               Manufactory_date DATE DEFAULT NULL,
+                              Expiry_date DATE DEFAULT NULL,
+                              Sale_price DOUBLE(10,2) DEFAULT NULL,
+                              Retail_price DOUBLE(10,2) DEFAULT NULL,
+                              Stock INT(11) DEFAULT NULL,
+                              store_id INT(11) DEFAULT NULL,
+                             PRIMARY KEY (`Product_id`)
+                             )
+
+
+•	ADD  PROUDUCT:
+(This query  will insert data only in one column)
+
+INSERT INTO product(Product_name)
+VALUES(‘Cake’)
+
+(For multiple column data) 
+
+INSERT INTO product(Product_name,sale_price)  VALUES(‘Cake’,32.0)
+
+
+
+
+
+
+
+•	UPDATE PRODUCT:
+(For updating of one value)
+
+UPDATE product  SET  Product_name=’Cupcake’ WHERE  Product_name=’Cake’
+
+(For updating of multiple values)
+
+UPDATE product  SET  Product_name=’Cupcake’ , Sale_price=34.0 WHERE  Product_name=’Cake’
+
+•	DELETE PRODUCT:
+ (For  deleting of all the data present in table)
+
+DELETE FROM product
+
+(For deleting of some specific data)
+
+DELETE FROM product WHERE Product_name=’Cupcake’
+
+4.	CREATING PURCHASE TABLE:
+
+CREATE TABLE purchase (
+purchase_id int(11) NOT NULL AUTO_INCREMENT,
+purchase_no varchar(255) DEFAULT NULL,
+purchase_type varchar(255) DEFAULT NULL,
+feedback varchar(255) DEFAULT NULL,
+purchase_date date DEFAULT NULL,
+PRIMARY KEY (`purchase_id`)
+)
+
+•	ADD  PURCHASE:
+(This query  will insert data only in one column)
+
+INSERT INTO purchase(Purchase_no)
+VALUES(30)
+
+(For multiple column data) 
+
+INSERT INTO purchase(Purchase_no,Purchase_type)  VALUES(30,’cash’)
+
+•	UPDATE PURCHASE:
+(For updating of one value)
+
+UPDATE purchase  SET  Purchase_no=33 WHERE Purchase_no=30
+
+(For updating of multiple values)
+
+UPDATE purchase  SET  Purchase_no=33 , Purchase_type=’Credit card’ WHERE Purchase_no=30
+
+
+
+•	DELETE PURCHASE:
+(For  deleting of all the data present in table)
+
+DELETE FROM purchase
+
+(For deleting of some specific data)
+
+DELETE FROM purchase  WHERE Purchase_no=30
+
+5.	CREATING SALE TABLE:
+
+CREATE TABLE sale (
+ sale_id int(11) NOT NULL AUTO_INCREMENT,
+sale_no varchar(255) DEFAULT NULL,
+total double(10,2) DEFAULT NULL,
+value double(10,2) DEFAULT NULL,
+sale_date date DEFAULT NULL,
+sale_tax enum('%','Amount') DEFAULT NULL,
+profit double(10,2) DEFAULT NULL,
+PRIMARY KEY (`sale_id`)
+)
+
+•	ADD  SALE:
+(This query  will insert data only in one column)
+
+INSERT INTO sale(Sale_no)
+VALUES(30)
+(For multiple column data) 
+
+INSERT INTO sale_(Sale_no,Total)
+VALUES(30,400.0)
+
+•	UPDATE SALE:
+(For updating of one value)
+
+UPDATE sale SET  Sale_no=33 WHERE  Sale_no=30
+
+(For updating of multiple values)
+
+UPDATE sale  SET  Sale_no=33  , Total=4773.0 WHERE Sale_no=30
+
+•	DELETE SALE:
+(For  deleting of all the data present in table) 
+
+DELETE FROM sale
+
+(For deletion of some specific data)
+
+DELETE FROM sale WHERE Sale_no=30
+
+6.	CREATING STORE TABLE:
+CREATE TABLE `store` (
+  `Store_id` INT(11) NOT NULL AUTO_INCREMENT,
+`Store_name` varchar(255) NOT NULL,
+  `Product_id` INT(11) DEFAULT NULL,
+  `Sale_id` INT(11) DEFAULT NULL,
+  `Purchase_id` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`Store_id`)
+)
+
+
+7.	CREATING PURCHASE_DETAILS TABLE:
+CREATE TABLE `purchase_details` (
+  `Purchase_detail_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Quantity` INT(11) DEFAULT NULL,
+  `Price` INT(11) DEFAULT NULL,
+  `Purchase_id` INT(11) DEFAULT NULL,
+  `Product_id` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`Purchase_detail_id`)
+)
+8.	CREATING  SALE_DETAILS TABLE:
+
+CREATE TABLE `sale_details` (
+  `Sale_details_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Product_id` INT(11) DEFAULT NULL,
+  `Product_quantity` INT(11) DEFAULT NULL,
+  `Price` INT(11) DEFAULT NULL,
+  `Sale_id` INT(11) DEFAULT NULL,
+  PRIMARY KEY (`Sale_details_id`)
+)
+
+9.	KEYS:
+
+(Foreign key Product  to Store)
+ALTER TABLE store 
+ADD FOREIGN KEY product(Sale_id) REFERENCES store(Sale_id)
+
+(Foreign key purchase_details to Product)
+ALTER TABLE product
+ADD FOREIGN KEY purchase_details(Product_id) REFERENCES product(Product_id)
+
+
+
+(Foreign key Sale_details to Product)
+ALTER TABLE product
+ADD FOREIGN KEY sale_details(Product_id) REFERENCES product(Product_id)
+
+(Foreign key Purchase_details to Purchase)
+ALTER TABLE purchase 
+ADD FOREIGN KEY purchase_details(Purchase_id) REFERENCES purchase(Purchase_id)
+
+(Foreign key Store to Purchase)
+ALTER TABLE purchase 
+ADD FOREIGN KEY store(Purchase_id) REFERENCES purchase(Purchase_id)
+
+(Foreign key Store to Sale)
+ALTER TABLE sale 
+ADD FOREIGN KEY store(Sale_id) REFERENCES sale(Sale_id)
+
+(Foreign key Sale_Details to Sale)
+ALTER TABLE sale 
+ADD FOREIGN KEY sale_details(Sale_id) REFERENCES sale(Sale_id)
+
